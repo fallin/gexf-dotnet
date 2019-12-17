@@ -46,6 +46,9 @@ namespace DotNet.Gexf.UnitTests
             };
 
             var gexf = new GexfDocument();
+            gexf.Meta.LastModified = DateTimeOffset.Now;
+            gexf.Meta.Creator = "NUnit";
+
             gexf.Graph.IdType = GexfIdType.Integer;
 
             GexfId lat = "lat";

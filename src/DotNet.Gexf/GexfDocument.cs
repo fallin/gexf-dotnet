@@ -26,6 +26,7 @@ namespace DotNet.Gexf
                     new XAttribute("xmlns", xml.Gexf.Namespace),
                     new XAttribute(XNamespace.Xmlns + "viz", xml.Viz.Namespace),
                     new XAttribute("version", "1.2"),
+                    Meta.Render(xml),
                     Graph.Render(xml)
                     )
             );
