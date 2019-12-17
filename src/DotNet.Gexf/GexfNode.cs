@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
@@ -16,7 +17,7 @@ namespace DotNet.Gexf
 
         public GexfNode(GexfId id)
         {
-            Id = id;
+            Id = id ?? throw new ArgumentNullException(nameof(id));
 
             _attrValues = new Lazy<GexfAttributeValueList>(() => new GexfAttributeValueList());
         }
@@ -35,5 +36,24 @@ namespace DotNet.Gexf
 
             return element;
         }
+
+        private sealed class IdEqualityComparer : IEqualityComparer<GexfNode>
+        {
+            public bool Equals(GexfNode x, GexfNode y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id.Equals(y.Id);
+            }
+
+            public int GetHashCode(GexfNode obj)
+            {
+                return obj.Id.GetHashCode();
+            }
+        }
+
+        public static IEqualityComparer<GexfNode> IdComparer { get; } = new IdEqualityComparer();
     }
 }

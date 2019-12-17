@@ -4,23 +4,23 @@ namespace DotNet.Gexf
 {
     public sealed class GexfGraph
     {
-        public GexfNodeList Nodes { get; }
-        public GexfEdgeList Edges { get; }
+        public GexfNodeSet Nodes { get; }
+        public GexfEdgeSet Edges { get; }
 
         public GexfModeType Mode { get; set; }
         public GexfEdgeType DefaultEdgeType { get; set; }
         public GexfIdType IdType { get; set; }
 
-        public GexfAttributeList NodeAttributes { get; }
-        public GexfAttributeList EdgeAttributes { get; }
+        public GexfAttributeSet NodeAttributes { get; }
+        public GexfAttributeSet EdgeAttributes { get; }
 
         public GexfGraph()
         {
-            Nodes = new GexfNodeList();
-            Edges = new GexfEdgeList();
+            Nodes = new GexfNodeSet();
+            Edges = new GexfEdgeSet();
 
-            NodeAttributes = new GexfAttributeList(GexfClassType.Node);
-            EdgeAttributes = new GexfAttributeList(GexfClassType.Edge);
+            NodeAttributes = new GexfAttributeSet(GexfClassType.Node);
+            EdgeAttributes = new GexfAttributeSet(GexfClassType.Edge);
 
             Mode = GexfModeType.Default;
             DefaultEdgeType = GexfEdgeType.Default;
