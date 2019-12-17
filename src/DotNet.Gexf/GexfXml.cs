@@ -31,9 +31,9 @@ namespace DotNet.Gexf
             return condition() ? content() : null;
         }
 
-        public XAttribute Attribute(string name, GexfId value)
+        public XAttribute Attribute(string name, GexfId id)
         {
-            return Attribute(name, value.Id);
+            return Attribute(name, id.Match<object>(i => i, s => s));
         }
 
         public XAttribute Attribute(string name, DateTimeOffset value)

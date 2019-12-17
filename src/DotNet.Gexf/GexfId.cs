@@ -3,52 +3,105 @@ using System.Diagnostics;
 
 namespace DotNet.Gexf
 {
-    [DebuggerDisplay("Id={Id}")]
-    public sealed class GexfId : IEquatable<GexfId>
+    public abstract class GexfId : IEquatable<GexfId>
     {
-        public object Id { get; }
         public GexfIdType Type { get; }
 
-        public GexfId(int id) : this(id, GexfIdType.Integer)
+        protected GexfId(GexfIdType type)
         {
-        }
-
-        public GexfId(string id) : this(id, GexfIdType.String)
-        {
-        }
-
-        private GexfId(object id, GexfIdType type)
-        {
-            Id = id ?? throw new ArgumentNullException(nameof(id));
             Type = type;
         }
 
-        /// <inheritdoc />
-        public override string ToString()
+        public abstract T Match<T>(Func<int, T> intFunc, Func<string, T> strFunc);
+
+        [DebuggerDisplay("Id={" + nameof(_id) + "}")]
+        public class Int : GexfId
         {
-            return Id.ToString();
+            readonly int _id;
+
+            public Int(int id) : base(GexfIdType.Integer)
+            {
+                _id = id;
+            }
+
+            public override T Match<T>(Func<int, T> intFunc, Func<string, T> strFunc)
+            {
+                return intFunc(_id);
+            }
+
+            public override string ToString()
+            {
+                return _id.ToString();
+            }
         }
 
-        /// <inheritdoc />
+        [DebuggerDisplay("Id={" + nameof(_id) + "}")]
+        public class Str : GexfId 
+        {
+            readonly string _id;
+
+            public Str(string id) : base(GexfIdType.String)
+            {
+                _id = id;
+            }
+
+            public override T Match<T>(Func<int, T> intFunc, Func<string, T> strFunc)
+            {
+                return strFunc(_id);
+            }
+
+            public override string ToString()
+            {
+                return _id;
+            }
+        }
+
+        // public void Match(Action<int> intId, Action<string> strId)
+        // {
+        //     // Adapt leaf action to func (ret null)
+        //     object AdaptInt(int value)
+        //     {
+        //         intId?.Invoke(value);
+        //         return null;
+        //     }
+        //
+        //     // Adapt node action to func (ret null)
+        //     object AdaptStr(string value)
+        //     {
+        //         strId?.Invoke(value);
+        //         return null;
+        //     }
+        //
+        //     Match(AdaptInt, AdaptStr);
+        // }
+
         public bool Equals(GexfId other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return string.Equals(Id, other.Id);
+            if (other == null) return false;
+
+            return Match(
+                intLeft =>
+                {
+                    return other.Match(intRight => intLeft == intRight, _ => false);
+                },
+                strLeft =>
+                {
+                    return other.Match(_ => false, strRight => strLeft == strRight);
+                }
+            );
         }
 
-        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj is GexfId other && Equals(other);
+            var other = obj as GexfId;
+            return other != null && Equals(other);
         }
 
-        /// <inheritdoc />
         public override int GetHashCode()
         {
-            return Id != null ? Id.GetHashCode() : 0;
+            return Match(i => i.GetHashCode(), s => s.GetHashCode());
         }
 
         public static bool operator ==(GexfId left, GexfId right)
@@ -61,14 +114,14 @@ namespace DotNet.Gexf
             return !Equals(left, right);
         }
 
-        public static implicit operator GexfId(int i)
+        public static implicit operator GexfId(int id)
         {
-            return new GexfId(i);
+            return new Int(id);
         }
 
-        public static implicit operator GexfId(string s)
+        public static implicit operator GexfId(string id)
         {
-            return new GexfId(s);
+            return new Str(id);
         }
     }
 }

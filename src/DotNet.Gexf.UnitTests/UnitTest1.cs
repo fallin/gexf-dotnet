@@ -8,11 +8,6 @@ namespace DotNet.Gexf.UnitTests
 {
     public class Tests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         class Location
         {
             public Location(decimal lat, decimal lon, string label)
@@ -53,8 +48,8 @@ namespace DotNet.Gexf.UnitTests
             var gexf = new GexfDocument();
             gexf.Graph.IdType = GexfIdType.Integer;
 
-            GexfId lat = new GexfId("lat");
-            GexfId lon = new GexfId("lon");
+            GexfId lat = "lat";
+            GexfId lon = "lon";
 
             gexf.Graph.NodeAttributes.AddRange(new[]
             {
