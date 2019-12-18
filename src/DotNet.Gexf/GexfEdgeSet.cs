@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace DotNet.Gexf
@@ -15,13 +16,18 @@ namespace DotNet.Gexf
 
         public XElement Render(GexfXml xml, GexfGraph graph)
         {
-            XElement edges = xml.Gexf.Element("edges",
-                xml.Attribute("count", this.Count)
+            XElement edges = null;
+
+            if (this.Any())
+            {
+                edges = xml.Gexf.Element("edges",
+                    xml.Attribute("count", this.Count)
                 );
 
-            foreach (GexfEdge edge in this)
-            {
-                edges.Add(edge.Render(xml, graph));
+                foreach (GexfEdge edge in this)
+                {
+                    edges.Add(edge.Render(xml, graph));
+                }
             }
 
             return edges;

@@ -1,26 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DotNet.Gexf
 {
-    public abstract class GexfHashSet<TObject> : HashSet<TObject> where TObject : IIdentifiable<GexfId> 
+    public abstract class GexfHashSet<T> : HashSet<T> where T : IIdentifiable<GexfId> 
     {
         protected GexfHashSet() : base(IdentityComparer)
         {
         }
 
-        protected GexfHashSet(IEnumerable<TObject> collection) : base(collection, IdentityComparer)
+        protected GexfHashSet(IEnumerable<T> collection) : base(collection, IdentityComparer)
         {
         }
 
-        public void AddRange(IEnumerable<TObject> collection)
+        public void AddRange(IEnumerable<T> collection)
         {
-            foreach (TObject item in collection)
+            if (collection != null)
             {
-                Add(item);
+                foreach (T item in collection.Where(x => x != null))
+                {
+                    Add(item);
+                }
             }
         }
 
-        public static IEqualityComparer<TObject> IdentityComparer { get; } = new IdentifiableEqualityComparer<TObject, GexfId>();
+        public void AddRange(params T[] collection)
+        {
+            AddRange((IEnumerable<T>)collection);
+        }
+
+        public static IEqualityComparer<T> IdentityComparer { get; } = new IdentifiableEqualityComparer<T, GexfId>();
     }
 }

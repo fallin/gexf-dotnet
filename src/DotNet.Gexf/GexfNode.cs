@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
@@ -16,11 +15,11 @@ namespace DotNet.Gexf
         {
         }
 
-        public GexfHierarchicalNode(GexfId id, string label, params IIdentifiable<GexfId>[] content) 
+        public GexfHierarchicalNode(GexfId id, string label) 
             : base(id, label)
         {
-            Nodes = new GexfNodeSet(content.OfType<GexfNode>());
-            Edges = new GexfEdgeSet(content.OfType<GexfEdge>());
+            Nodes = new GexfNodeSet();
+            Edges = new GexfEdgeSet();
         }
 
         public override XElement Render(GexfXml xml, GexfGraph graph)
@@ -43,10 +42,19 @@ namespace DotNet.Gexf
 
     public class GexfParentedNode : GexfNode
     {
-        public GexfId Parent { get; set; }
+        public GexfId Parent { get; }
 
-        public GexfParentedNode(GexfId id) : base(id)
+        public GexfParentedNode(GexfId id) : this(id, string.Empty)
         {
+        }
+
+        public GexfParentedNode(GexfId id, string label) : this(id, label, default)
+        { }
+
+        public GexfParentedNode(GexfId id, string label, GexfId parent)
+            : base(id, label)
+        {
+            Parent = parent;
         }
 
         public override XElement Render(GexfXml xml, GexfGraph graph)

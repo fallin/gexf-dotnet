@@ -83,11 +83,11 @@ namespace DotNet.Gexf.UnitTests
                 gexf.Graph.Nodes.Add(node);
             };
 
-            gexf.Graph.Edges.AddRange(new [] {
+            gexf.Graph.Edges.AddRange(
                 new GexfEdge(1, UniqueId(dragon), UniqueId(odell)),
                 new GexfEdge(2, UniqueId(odell), UniqueId(belgium)),
                 new GexfEdge(3, UniqueId(belgium), UniqueId(equinox))
-                });
+                );
 
             string path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
@@ -101,18 +101,26 @@ namespace DotNet.Gexf.UnitTests
             var gexf = new GexfDocument();
 
             gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
-            gexf.Graph.Nodes.AddRange(new []
-            {
-                new GexfHierarchicalNode("a", "Kevin Bacon", 
-                    new GexfHierarchicalNode("b", "God",
-                        new GexfNode("c", "human1"),
-                        new GexfNode("d", "human2"))
-                    ),
-                new GexfHierarchicalNode("e", "Me",
-                    new GexfNode("f", "frog1"),
-                    new GexfNode("g", "frog2")
-                    )
-            });
+            gexf.Graph.Nodes.AddRange(
+                new GexfHierarchicalNode("a", "Kevin Bacon")
+                {
+                    Nodes = {
+                        new GexfHierarchicalNode("b", "God")
+                        {
+                            Nodes = {
+                                new GexfNode("c", "human1"),
+                                new GexfNode("d", "human2")
+                            }
+                        }
+                    }
+                },
+                new GexfHierarchicalNode("e", "Me")
+                {
+                    Nodes = { 
+                        new GexfNode("f", "frog1"),
+                        new GexfNode("g", "frog2")
+                    }
+                });
             gexf.Graph.Edges.AddRange(new []
             {
                 new GexfEdge(0, "b", "e"),
@@ -133,30 +141,60 @@ namespace DotNet.Gexf.UnitTests
             var gexf = new GexfDocument();
 
             gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
-            gexf.Graph.Nodes.AddRange(new[]
-            {
-                new GexfHierarchicalNode("a", "Kevin Bacon",
-                    new GexfHierarchicalNode("b", "God",
-                        new GexfNode("c", "human1"),
-                        new GexfNode("d", "human2"),
-                        new GexfEdge(0, "c", "d")
-                        )
-                ),
-                new GexfHierarchicalNode("e", "Me",
-                    new GexfNode("f", "frog1"),
-                    new GexfNode("g", "frog2")
-                )
-            });
-            gexf.Graph.Edges.AddRange(new[]
-            {
+            gexf.Graph.Nodes.AddRange(
+                new GexfHierarchicalNode("a", "Kevin Bacon")
+                {
+                    Nodes = {
+                        new GexfHierarchicalNode("b", "God")
+                        {
+                            Nodes = {
+                                new GexfNode("c", "human1"),
+                                new GexfNode("d", "human2"),
+                            },
+                            Edges = {
+                                new GexfEdge(0, "c", "d")
+                            }
+                        }
+                    }
+                },
+                new GexfHierarchicalNode("e", "Me")
+                {
+                    Nodes = { 
+                        new GexfNode("f", "frog1"),
+                        new GexfNode("g", "frog2")
+                    }
+                });
+            gexf.Graph.Edges.AddRange(
                 new GexfEdge(1, "b", "e"),
                 new GexfEdge(3, "f", "a"),
-                new GexfEdge(2, "g", "b"), 
-            });
+                new GexfEdge(2, "g", "b")
+                );
 
             string path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 "hierarchy-sequential-safe-edges-inside.gexf");
+            gexf.Save(path);
+        }
+
+        [Test]
+        public void HierarchyWithRandomWriting()
+        {
+            var gexf = new GexfDocument();
+
+            gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
+            gexf.Graph.Nodes.AddRange(
+                new GexfParentedNode("a", "Kevin Bacon"),
+                new GexfParentedNode("b", "God", "a"),
+                new GexfParentedNode("c", "human1", "b"),
+                new GexfParentedNode("d", "human2", "b"),
+                new GexfParentedNode("e", "Me", "a"),
+                new GexfParentedNode("f", "frog1", "e"),
+                new GexfParentedNode("g", "frog2", "e")
+            );
+
+            string path = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                "hierarchy-random-writing.gexf");
             gexf.Save(path);
         }
     }
