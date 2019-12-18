@@ -1,44 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Xml.Linq;
 
 namespace DotNet.Gexf
 {
     public sealed class GexfMeta
     {
-        public DateTimeOffset LastModified { get; set; }
+        public DateTimeOffset? LastModified { get; set; }
         public string Creator { get; set; }
         public string Description { get; set; }
         public HashSet<string> Keywords { get; }
 
         public GexfMeta()
         {
-            LastModified = DateTimeOffset.Now;
             Keywords = new HashSet<string>();
+        }
+
+        public void UpdateLastModified()
+        {
+            LastModified = DateTimeOffset.Now;
         }
 
         public XElement Render(GexfXml xml)
         {
-            bool Specified(string value) => !string.IsNullOrEmpty(value);
+            bool AnyMetadataSpecified() => Specified(LastModified)
+                || Specified(Creator)
+                || Specified(Description)
+                || Keywords.Any();
 
-            var element = xml.Gexf.Element("meta",
-                xml.Attribute("lastmodifieddate", LastModified),
+            var element = xml.When(AnyMetadataSpecified,
+                () =>
+                    xml.Gexf.Element("meta",
 
-                xml.When(() => Specified(Creator), 
-                    () => xml.Gexf.Element("creator", Creator)
-                    ),
+                        xml.When(() => Specified(LastModified),
+                            () => xml.Attribute("lastmodifieddate", LastModified)),
 
-                xml.When(() => Specified(Description),
-                    () => xml.Gexf.Element("description", Description)
-                    ),
+                        xml.When(() => Specified(Creator),
+                            () => xml.Gexf.Element("creator", Creator)
+                        ),
 
-                xml.When(() => Keywords.Any(),
-                    () => xml.Gexf.Element("keywords", string.Join(",", Keywords)
-                    )
-                )
-            );
+                        xml.When(() => Specified(Description),
+                            () => xml.Gexf.Element("description", Description)
+                        ),
+
+                        xml.When(() => Keywords.Any(),
+                            () => xml.Gexf.Element("keywords", string.Join(",", Keywords)
+                            )
+                        )
+                ));
             return element;
         }
+
+        static bool Specified<T>(T? nullable) where T : struct => nullable.HasValue;
+        static bool Specified(string value) => !string.IsNullOrEmpty(value);
     }
 }

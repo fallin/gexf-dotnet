@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Gexf", "DotNet.Gexf\DotNet.Gexf.csproj", "{6F788C6A-8CCA-4D3F-8910-C513F9F23C08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet.Gexf.UnitTests", "DotNet.Gexf.UnitTests\DotNet.Gexf.UnitTests.csproj", "{3E7F82AC-43C7-4CA5-8EC7-D96C5BA48A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Gexf.UnitTests", "DotNet.Gexf.UnitTests\DotNet.Gexf.UnitTests.csproj", "{3E7F82AC-43C7-4CA5-8EC7-D96C5BA48A0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

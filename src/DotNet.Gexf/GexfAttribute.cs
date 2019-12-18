@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace DotNet.Gexf
 {
-    public sealed class GexfAttribute
+    public sealed class GexfAttribute : IIdentifiable<GexfId>
     {
         public GexfId Id { get; }
         public string Title { get; set; }
@@ -37,24 +37,5 @@ namespace DotNet.Gexf
 
             return element;
         }
-
-        private sealed class IdEqualityComparer : IEqualityComparer<GexfAttribute>
-        {
-            public bool Equals(GexfAttribute x, GexfAttribute y)
-            {
-                if (ReferenceEquals(x, y)) return true;
-                if (ReferenceEquals(x, null)) return false;
-                if (ReferenceEquals(y, null)) return false;
-                if (x.GetType() != y.GetType()) return false;
-                return x.Id.Equals(y.Id);
-            }
-
-            public int GetHashCode(GexfAttribute obj)
-            {
-                return obj.Id.GetHashCode();
-            }
-        }
-
-        public static IEqualityComparer<GexfAttribute> IdComparer { get; } = new IdEqualityComparer();
     }
 }

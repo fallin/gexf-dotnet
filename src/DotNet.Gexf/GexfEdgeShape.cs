@@ -5,8 +5,6 @@
         Solid,
         Dotted,
         Dashed,
-        Double,
-
-        Default = Solid
+        Double
     }
 }

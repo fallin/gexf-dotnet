@@ -24,23 +24,25 @@ namespace DotNet.Gexf
 
             Mode = GexfModeType.Static;
             DefaultEdgeType = GexfEdgeType.Undirected;
-            IdType = GexfIdType.Default;
+            IdType = GexfIdType.String;
         }
 
         public XElement Render(GexfXml xml)
         {
             var element = xml.Gexf.Element("graph",
-                xml.Attribute("mode", Mode),
-                xml.Attribute("defaultedgetype", DefaultEdgeType),
 
-                xml.When(() => IdType != GexfIdType.Default,
+                xml.When(() => Mode != GexfModeType.Static, 
+                    () => xml.Attribute("mode", Mode)),
+
+                xml.When(() => DefaultEdgeType != GexfEdgeType.Undirected,
+                    () => xml.Attribute("defaultedgetype", DefaultEdgeType)),
+
+                xml.When(() => IdType != GexfIdType.String,
                     () => xml.Attribute("idtype", IdType)),
 
                 NodeAttributes.Render(xml),
                 EdgeAttributes.Render(xml),
                 Nodes.Render(xml, this),
-
-                // Edges must be declared after nodes
                 Edges.Render(xml, this)
             );
             return element;

@@ -3,11 +3,14 @@ using System.Xml.Linq;
 
 namespace DotNet.Gexf
 {
-    public sealed class GexfEdgeSet : HashSet<GexfEdge>
+    public sealed class GexfEdgeSet : GexfHashSet<GexfEdge>
     {
-        public GexfEdgeSet() : base(GexfEdge.IdComparer)
+        public GexfEdgeSet()
         {
-            //_idGenerator = new Lazy<ObjectIDGenerator>(() => new ObjectIDGenerator());
+        }
+
+        public GexfEdgeSet(IEnumerable<GexfEdge> collection) : base(collection)
+        {
         }
 
         public XElement Render(GexfXml xml, GexfGraph graph)

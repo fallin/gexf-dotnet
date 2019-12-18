@@ -3,8 +3,6 @@
     public enum GexfIdType
     {
         String,
-        Integer,
-
-        Default = String
+        Integer
     }
 }

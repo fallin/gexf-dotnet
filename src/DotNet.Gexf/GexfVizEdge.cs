@@ -9,10 +9,10 @@ namespace DotNet.Gexf
         public GexfFloat Thickness { get; set; }
         public GexfEdgeShape Shape { get; set; }
 
-        /// <inheritdoc />
-        public GexfVizEdge(GexfId id) : base(id)
+        public GexfVizEdge(GexfId id, GexfId source, GexfId target) : base(id, source, target)
         {
             Thickness = 1.0f;
+            Shape = GexfEdgeShape.Solid;
         }
 
         /// <inheritdoc />
@@ -37,7 +37,7 @@ namespace DotNet.Gexf
                 ));
             }
 
-            if (Shape != GexfEdgeShape.Default)
+            if (Shape != GexfEdgeShape.Solid)
             {
                 element.Add(xml.Viz.Element("shape",
                     xml.Attribute("value", Shape)

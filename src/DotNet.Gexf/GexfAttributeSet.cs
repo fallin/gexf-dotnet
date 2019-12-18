@@ -1,24 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Xml.Linq;
 
 namespace DotNet.Gexf
 {
-    public sealed class GexfAttributeSet : HashSet<GexfAttribute>
+    public sealed class GexfAttributeSet : GexfHashSet<GexfAttribute>
     {
         public GexfClassType Class { get; }
 
-        public GexfAttributeSet(GexfClassType @class) : base(GexfAttribute.IdComparer)
+        public GexfAttributeSet(GexfClassType @class)
         {
             Class = @class;
-        }
-
-        public void AddRange(IEnumerable<GexfAttribute> attributes)
-        {
-            foreach (GexfAttribute attribute in attributes)
-            {
-                Add(attribute);
-            }
         }
 
         public XElement Render(GexfXml xml)
