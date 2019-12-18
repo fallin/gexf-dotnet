@@ -9,7 +9,7 @@ namespace DotNet.Gexf
     {
         public Color? Color { get; set; }
         public Vector3? Position { get; set; }
-        public float Size { get; set; }
+        public GexfFloat Size { get; set; }
         public GexfNodeShape Shape { get; set; }
 
         public Uri ImageUrl { get; set; }
@@ -45,7 +45,7 @@ namespace DotNet.Gexf
                 ));
             }
 
-            if (!GexfFloat.Equal(Size, 1.0f))
+            if (!Size.Equals(1.0f))
             {
                 element.Add(xml.Viz.Element("size",
                     xml.Attribute("value", Size)

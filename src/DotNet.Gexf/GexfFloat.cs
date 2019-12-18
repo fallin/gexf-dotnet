@@ -2,19 +2,50 @@
 
 namespace DotNet.Gexf
 {
-    public static class GexfFloat
+    public struct GexfFloat : IEquatable<GexfFloat>
     {
         public const float FloatEpsilon = 0.000001f;
 
-        /// <summary>
-        /// Indicates whether two floating-point values are approximately equal.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public static bool Equal(float x, float y)
+        private readonly float _value;
+
+        public GexfFloat(float value)
         {
-            return Math.Abs(x - y) < FloatEpsilon;
+            _value = value;
+        }
+
+        public bool Equals(GexfFloat other)
+        {
+            return Math.Abs(_value - other._value) < FloatEpsilon;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is GexfFloat other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return _value.GetHashCode();
+        }
+
+        public static bool operator ==(GexfFloat left, GexfFloat right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(GexfFloat left, GexfFloat right)
+        {
+            return !left.Equals(right);
+        }
+
+        public static implicit operator GexfFloat(float value)
+        {
+            return new GexfFloat(value);
+        }
+
+        public static implicit operator float(GexfFloat value)
+        {
+            return value._value;
         }
     }
 }

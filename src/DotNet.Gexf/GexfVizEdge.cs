@@ -6,7 +6,7 @@ namespace DotNet.Gexf
     public class GexfVizEdge : GexfEdge
     {
         public Color? Color { get; set; }
-        public float Thickness { get; set; }
+        public GexfFloat Thickness { get; set; }
         public GexfEdgeShape Shape { get; set; }
 
         /// <inheritdoc />
@@ -30,7 +30,7 @@ namespace DotNet.Gexf
                     ));
             }
 
-            if (!GexfFloat.Equal(Thickness, 1.0f))
+            if (!Thickness.Equals(1.0f))
             {
                 element.Add(xml.Viz.Element("thickness",
                     xml.Attribute("value", Thickness)
