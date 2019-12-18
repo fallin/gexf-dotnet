@@ -108,12 +108,18 @@ namespace DotNet.Gexf.UnitTests
         }
 
         [Test]
-        public void EqualsShouldReturnFalseForIdsWithDifferentTypes()
+        public void EqualsShouldReturnTrueWhenIntIdAndStrIdHaveEquivalentValue()
         {
+            // Treating an int and str id value as equivalent when they have equivalent
+            // values (e.g., treating "2" == 2) is not ideal by any means. However, the
+            // spec says ids are represented as xml string types and must be unique in the
+            // nodes/edge sets, so equality of the types must be defined this way too!
+
             GexfId id1 = 1;
             GexfId id2 = "1";
 
-            id1.Equals(id2).Should().BeFalse();
+            id1.Equals(id2).Should().BeTrue();
+            id2.Equals(id1).Should().BeTrue();
         }
         /// <summary>
         /// 
@@ -156,12 +162,39 @@ namespace DotNet.Gexf.UnitTests
         }
 
         [Test]
-        public void BoxedEqualsShouldReturnFalseForIdsWithDifferentTypes()
+        public void BoxedEqualsShouldReturnFalseWhenComparingGexfIdIntTypeWithInteger()
         {
             GexfId id1 = 1;
-            GexfId id2 = "1";
+            object id2 = 1;
 
-            id1.Equals((object)id2).Should().BeFalse();
+            id1.Equals(id2).Should().BeFalse();
+        }
+
+        [Test]
+        public void BoxedEqualsShouldReturnFalseWhenComparingGexfIdIntTypeWithString()
+        {
+            GexfId id1 = 1;
+            object id2 = "1";
+
+            id1.Equals(id2).Should().BeFalse();
+        }
+
+        [Test]
+        public void BoxedEqualsShouldReturnFalseWhenComparingGexfIdStrTypeWithInteger()
+        {
+            GexfId id1 = "1";
+            object id2 = "1";
+
+            id1.Equals(id2).Should().BeFalse();
+        }
+
+        [Test]
+        public void BoxedEqualsShouldReturnFalseWhenComparingGexfIdStrTypeWithString()
+        {
+            GexfId id1 = "A";
+            object id2 = "A";
+
+            id1.Equals(id2).Should().BeFalse();
         }
     }
 }

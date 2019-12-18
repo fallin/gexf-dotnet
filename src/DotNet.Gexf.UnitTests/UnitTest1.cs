@@ -102,7 +102,7 @@ namespace DotNet.Gexf.UnitTests
 
             string path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                "pubcrawl.gexf");
+                "breweries.gexf");
             gexf.Save(path);
         }
     }

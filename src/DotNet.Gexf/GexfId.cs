@@ -83,11 +83,15 @@ namespace DotNet.Gexf
             return Match(
                 intLeft =>
                 {
-                    return other.Match(intRight => intLeft == intRight, _ => false);
+                    return other.Match(
+                        intRight => intLeft == intRight, 
+                        strRight => string.Equals($"{intLeft}", strRight));
                 },
                 strLeft =>
                 {
-                    return other.Match(_ => false, strRight => strLeft == strRight);
+                    return other.Match(
+                        intRight => string.Equals(strLeft, $"{intRight}"), 
+                        strRight => string.Equals(strLeft, strRight));
                 }
             );
         }
