@@ -15,7 +15,7 @@ namespace DotNet.Gexf
 
         public abstract T Match<T>(Func<int, T> intFunc, Func<string, T> strFunc);
 
-        [DebuggerDisplay("Id={" + nameof(_id) + "}")]
+        [DebuggerDisplay("{" + nameof(_id) + "}")]
         public class Int : GexfId
         {
             readonly int _id;
@@ -36,7 +36,7 @@ namespace DotNet.Gexf
             }
         }
 
-        [DebuggerDisplay("Id={" + nameof(_id) + "}")]
+        [DebuggerDisplay("{" + nameof(_id) + "}")]
         public class Str : GexfId 
         {
             readonly string _id;

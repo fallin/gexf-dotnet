@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
+using DotNet.Gexf.Hierarchy;
+using DotNet.Gexf.Phylogeny;
 using NUnit.Framework;
 
 namespace DotNet.Gexf.UnitTests
@@ -195,6 +197,24 @@ namespace DotNet.Gexf.UnitTests
             string path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 "hierarchy-random-writing.gexf");
+            gexf.Save(path);
+        }
+
+        [Test]
+        public void PhylogenyExample()
+        {
+            var gexf = new GexfDocument();
+
+            gexf.Graph.Nodes.AddRange(
+                new GexfPhylogenyNode("a", "cheese"),
+                new GexfPhylogenyNode("b", "cherry"),
+                new GexfPhylogenyNode("c", "cake")
+                {
+                    Parents = { "a", "b" }
+                });
+            string path = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                "phylogeny.gexf");
             gexf.Save(path);
         }
     }
