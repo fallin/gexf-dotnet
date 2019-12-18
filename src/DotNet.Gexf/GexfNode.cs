@@ -9,24 +9,28 @@ namespace DotNet.Gexf
     [DebuggerDisplay("Id={Id}")]
     public class GexfNode
     {
-        private readonly Lazy<GexfAttributeValueList> _attrValues;
+        private readonly Lazy<GexfAttributeValueSet> _attrValues;
 
         public GexfId Id { get; }
         public string Label { get; set; }
-        public GexfAttributeValueList AttrValues => _attrValues.Value;
+        public GexfAttributeValueSet AttrValues => _attrValues.Value;
 
         public GexfNode(GexfId id)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
 
-            _attrValues = new Lazy<GexfAttributeValueList>(() => new GexfAttributeValueList());
+            _attrValues = new Lazy<GexfAttributeValueSet>(() => new GexfAttributeValueSet());
         }
 
         public virtual XElement Render(GexfXml xml, GexfGraph graph)
         {
+            string RequiredLabel() => string.IsNullOrWhiteSpace(Label) ? $"{Id}" : Label;
+
             var element = xml.Gexf.Element("node",
                 xml.Attribute("id", Id),
-                xml.Attribute("label", Label),
+
+                // The label attribute is required
+                xml.Attribute("label", RequiredLabel()),
 
                 xml.When(() => Id.Type != graph.IdType,
                     () => xml.Attribute("type", Id.Type)),
