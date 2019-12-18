@@ -4,8 +4,6 @@
     {
         Directed,
         Undirected,
-        Mutual,
-
-        Default = Undirected
+        Mutual
     }
 }

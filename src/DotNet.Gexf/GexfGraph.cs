@@ -22,8 +22,8 @@ namespace DotNet.Gexf
             NodeAttributes = new GexfAttributeSet(GexfClassType.Node);
             EdgeAttributes = new GexfAttributeSet(GexfClassType.Edge);
 
-            Mode = GexfModeType.Default;
-            DefaultEdgeType = GexfEdgeType.Default;
+            Mode = GexfModeType.Static;
+            DefaultEdgeType = GexfEdgeType.Undirected;
             IdType = GexfIdType.Default;
         }
 
@@ -39,6 +39,8 @@ namespace DotNet.Gexf
                 NodeAttributes.Render(xml),
                 EdgeAttributes.Render(xml),
                 Nodes.Render(xml, this),
+
+                // Edges must be declared after nodes
                 Edges.Render(xml, this)
             );
             return element;

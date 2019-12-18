@@ -23,7 +23,7 @@ namespace DotNet.Gexf
         public GexfEdge(GexfId id)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
-            Type = GexfEdgeType.Default;
+            Type = GexfEdgeType.Undirected;
 
             _attrValues = new Lazy<GexfAttributeValueList>(() => new GexfAttributeValueList());
         }

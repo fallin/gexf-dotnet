@@ -3,8 +3,6 @@
     public enum GexfModeType
     {
         Static,
-        Dynamic,
-
-        Default = Static
+        Dynamic
     }
 }
