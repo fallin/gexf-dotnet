@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using DotNet.Gexf.Hierarchy;
 using DotNet.Gexf.Phylogeny;
+using DotNet.Gexf.Visualization;
 using NUnit.Framework;
 
 namespace DotNet.Gexf.UnitTests
