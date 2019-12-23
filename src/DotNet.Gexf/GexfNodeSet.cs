@@ -13,7 +13,7 @@ namespace DotNet.Gexf
         {
         }
 
-        public XElement Render(GexfXml xml, GexfGraph graph)
+        public XElement ToXml(GexfXml xml, GexfGraph graph)
         {
             XElement nodes = xml.Gexf.Element("nodes",
                 xml.Attribute("count", this.Count)

@@ -26,12 +26,12 @@ namespace DotNet.Gexf.Hierarchy
 
             if (Nodes.Any())
             {
-                element.Add(Nodes.Render(xml, graph));
+                element.Add(Nodes.ToXml(xml, graph));
             }
 
             if (Edges.Any())
             {
-                element.Add(Edges.Render(xml, graph));
+                element.Add(Edges.ToXml(xml, graph));
             }
            
             return element;

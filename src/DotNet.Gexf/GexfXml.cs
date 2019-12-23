@@ -54,23 +54,21 @@ namespace DotNet.Gexf
 
         public class GexfElementFactory
         {
-            private readonly XNamespace _ns;
-
             internal GexfElementFactory(string namespaceUrl)
             {
-                _ns = namespaceUrl;
+                Namespace = namespaceUrl;
             }
 
-            public XNamespace Namespace => _ns;
+            public XNamespace Namespace { get; }
 
             public XElement Element(string name, object content)
             {
-                return new XElement(_ns + name, content);
+                return new XElement(Namespace + name, content);
             }
 
             public XElement Element(string name, params object[] content)
             {
-                return new XElement(_ns + name, content);
+                return new XElement(Namespace + name, content);
             }
         }
     }

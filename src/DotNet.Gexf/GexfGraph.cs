@@ -27,7 +27,7 @@ namespace DotNet.Gexf
             IdType = GexfIdType.String;
         }
 
-        public XElement Render(GexfXml xml)
+        public XElement ToXml(GexfXml xml)
         {
             var element = xml.Gexf.Element("graph",
 
@@ -40,10 +40,10 @@ namespace DotNet.Gexf
                 xml.When(() => IdType != GexfIdType.String,
                     () => xml.Attribute("idtype", IdType)),
 
-                NodeAttributes.Render(xml),
-                EdgeAttributes.Render(xml),
-                Nodes.Render(xml, this),
-                Edges.Render(xml, this)
+                NodeAttributes.ToXml(xml),
+                EdgeAttributes.ToXml(xml),
+                Nodes.ToXml(xml, this),
+                Edges.ToXml(xml, this)
             );
             return element;
         }

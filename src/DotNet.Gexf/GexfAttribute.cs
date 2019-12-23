@@ -17,7 +17,7 @@ namespace DotNet.Gexf
             Id = id;
         }
 
-        public XElement Render(GexfXml xml)
+        public XElement ToXml(GexfXml xml)
         {
             var element = xml.Gexf.Element("attribute",
                 xml.Attribute("id", Id),

@@ -16,7 +16,7 @@ namespace DotNet.Gexf
             Graph = new GexfGraph();
         }
 
-        public XDocument Render()
+        public XDocument ToXml()
         {
             GexfXml xml = new GexfXml();
 
@@ -26,8 +26,8 @@ namespace DotNet.Gexf
                     new XAttribute("xmlns", xml.Gexf.Namespace),
                     new XAttribute(XNamespace.Xmlns + "viz", xml.Viz.Namespace),
                     new XAttribute("version", "1.2"),
-                    Meta.Render(xml),
-                    Graph.Render(xml)
+                    Meta.ToXml(xml),
+                    Graph.ToXml(xml)
                     )
             );
 
@@ -36,7 +36,7 @@ namespace DotNet.Gexf
 
         public void Save(string fileName)
         {
-            var xdoc = Render();
+            var xdoc = ToXml();
             xdoc.Save(fileName, SaveOptions.OmitDuplicateNamespaces);
         }
     }
