@@ -8,7 +8,8 @@ using NUnit.Framework;
 
 namespace DotNet.Gexf.UnitTests
 {
-    public class GraphIntegrationTests
+    [Explicit("Examples create output files on Windows Desktop")]
+    public class Examples
     {
         class Location
         {
