@@ -21,7 +21,7 @@ namespace DotNet.Gexf
 
             foreach (GexfNode node in this)
             {
-                nodes.Add(node.Render(xml, graph));
+                nodes.Add(node.ToXml(xml, graph));
             }
 
             return nodes;

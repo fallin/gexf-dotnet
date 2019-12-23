@@ -6,8 +6,6 @@
         Square,
         Triangle,
         Diamond,
-        Image,
-
-        Default = Disc
+        Image
     }
 }

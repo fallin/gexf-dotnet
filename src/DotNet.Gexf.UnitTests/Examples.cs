@@ -74,7 +74,7 @@ namespace DotNet.Gexf.UnitTests
 
             foreach (var location in locations)
             {
-                var node = new GexfVizNode(UniqueId(location))
+                var node = new GexfNode(UniqueId(location))
                 {
                     Label = location.Label,
                     AttrValues =
