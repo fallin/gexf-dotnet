@@ -7,42 +7,37 @@ namespace DotNet.Gexf.Visualization
 {
     public static class GexfNodeExtensions
     {
-        public static VizColorProperty Color(this GexfNode node, Color color)
+        public static GexfNode Color(this GexfNode node, Color color)
         {
-            var property = new VizColorProperty(color);
-            node.ExtensionProperties.Add(property);
-            return property;
+            node.ExtensionProperties.Add(new VizColorProperty(color));
+            return node;
         }
 
-        public static VizPositionProperty Position(this GexfNode node, Vector3 position)
+        public static GexfNode Position(this GexfNode node, Vector3 position)
         {
-            var property = new VizPositionProperty(position);
-            node.ExtensionProperties.Add(property);
-            return property;
+            node.ExtensionProperties.Add(new VizPositionProperty(position));
+            return node;
         }
 
-        public static VizSizeProperty Size(this GexfNode node, GexfFloat size)
+        public static GexfNode Size(this GexfNode node, GexfFloat size)
         {
-            var property = new VizSizeProperty(size);
-            node.ExtensionProperties.Add(property);
-            return property;
+            node.ExtensionProperties.Add(new VizSizeProperty(size));
+            return node;
         }
 
-        public static VizNodeShapeProperty Shape(this GexfNode node, GexfNodeShape shape)
+        public static GexfNode Shape(this GexfNode node, GexfNodeShape shape)
         {
-            var property = new VizNodeShapeProperty(shape);
-            node.ExtensionProperties.Add(property);
-            return property;
+            node.ExtensionProperties.Add(new VizNodeShapeProperty(shape));
+            return node;
         }
 
-        public static VizNodeShapeProperty Image(this GexfNode node, Uri imageUrl)
+        public static GexfNode Image(this GexfNode node, Uri imageUrl)
         {
-            var property = new VizNodeShapeProperty(GexfNodeShape.Image)
+            node.ExtensionProperties.Add(new VizNodeShapeProperty(GexfNodeShape.Image)
             {
                 ImageUrl = imageUrl
-            };
-            node.ExtensionProperties.Add(property);
-            return property;
+            });
+            return node;
         }
     }
 }

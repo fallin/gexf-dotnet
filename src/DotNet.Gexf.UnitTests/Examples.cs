@@ -4,7 +4,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using DotNet.Gexf.Hierarchy;
 using DotNet.Gexf.Phylogeny;
-using DotNet.Gexf.Visualization;
 using NUnit.Framework;
 
 namespace DotNet.Gexf.UnitTests
@@ -187,13 +186,19 @@ namespace DotNet.Gexf.UnitTests
 
             gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
             gexf.Graph.Nodes.AddRange(
-                new GexfParentedNode("a", "Kevin Bacon"),
-                new GexfParentedNode("b", "God", "a"),
-                new GexfParentedNode("c", "human1", "b"),
-                new GexfParentedNode("d", "human2", "b"),
-                new GexfParentedNode("e", "Me", "a"),
-                new GexfParentedNode("f", "frog1", "e"),
-                new GexfParentedNode("g", "frog2", "e")
+                new GexfNode("a", "Kevin Bacon"),
+                new GexfNode("b", "God")
+                    .Parent("a"),
+                new GexfNode("c", "human1")
+                    .Parent("b"),
+                new GexfNode("d", "human2")
+                    .Parent("b"),
+                new GexfNode("e", "Me")
+                    .Parent("a"),
+                new GexfNode("f", "frog1")
+                    .Parent("e"),
+                new GexfNode("g", "frog2")
+                    .Parent("e")
             );
 
             string path = Path.Combine(

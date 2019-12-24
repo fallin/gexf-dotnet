@@ -6,25 +6,22 @@ namespace DotNet.Gexf.Visualization
 {
     public static class GexfEdgeExtensions
     {
-        public static VizColorProperty Color(this GexfEdge edge, Color color)
+        public static GexfEdge Color(this GexfEdge edge, Color color)
         {
-            var property = new VizColorProperty(color);
-            edge.ExtensionProperties.Add(property);
-            return property;
+            edge.ExtensionProperties.Add(new VizColorProperty(color));
+            return edge;
         }
 
-       public static VizThicknessProperty Thickness(this GexfEdge edge, GexfFloat thickness)
+       public static GexfEdge Thickness(this GexfEdge edge, GexfFloat thickness)
         {
-            var property = new VizThicknessProperty(thickness);
-            edge.ExtensionProperties.Add(property);
-            return property;
+            edge.ExtensionProperties.Add(new VizThicknessProperty(thickness));
+            return edge;
         }
 
-        public static VizEdgeShapeProperty Shape(this GexfEdge edge, GexfEdgeShape shape)
+        public static GexfEdge Shape(this GexfEdge edge, GexfEdgeShape shape)
         {
-            var property = new VizEdgeShapeProperty(shape);
-            edge.ExtensionProperties.Add(property);
-            return property;
+            edge.ExtensionProperties.Add(new VizEdgeShapeProperty(shape));
+            return edge;
         }
     }
 }
