@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Brant Fallin</Authors>
+    <Company />
+    <Version>0.1.0</Version>
+    <Copyright>Copyright © 2019, Brant Fallin</Copyright>
+    <RepositoryUrl>https://github.com/fallin/DotNet.Gexf</RepositoryUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Description>A .NET/C# library to generate GEXF (Graph Exchange XML Format) files</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

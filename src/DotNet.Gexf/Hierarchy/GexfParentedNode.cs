@@ -19,9 +19,9 @@ namespace DotNet.Gexf.Hierarchy
             Parent = parent;
         }
 
-        public override XElement Render(GexfXml xml, GexfGraph graph)
+        public override XElement ToXml(GexfXml xml, GexfGraph graph)
         {
-            XElement element = base.Render(xml, graph);
+            XElement element = base.ToXml(xml, graph);
 
             if (Parent != null)
             {

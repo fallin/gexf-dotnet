@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using DotNet.Gexf.Hierarchy;
 using DotNet.Gexf.Phylogeny;
+using DotNet.Gexf.Visualization;
 using NUnit.Framework;
 
 namespace DotNet.Gexf.UnitTests
@@ -73,7 +74,7 @@ namespace DotNet.Gexf.UnitTests
 
             foreach (var location in locations)
             {
-                var node = new GexfVizNode(UniqueId(location))
+                var node = new GexfNode(UniqueId(location))
                 {
                     Label = location.Label,
                     AttrValues =

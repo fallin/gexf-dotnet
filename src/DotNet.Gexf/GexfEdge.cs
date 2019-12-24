@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
@@ -7,9 +6,10 @@ using System.Xml.Linq;
 namespace DotNet.Gexf
 {
     [DebuggerDisplay("Id={Id}, Source={Source}, Target={Target}")]
-    public class GexfEdge : IIdentifiable<GexfId>
+    public class GexfEdge : IIdentifiable<GexfId>, IExtensionPropertyContainer
     {
         private readonly Lazy<GexfAttributeValueSet> _attrValues;
+        private readonly Lazy<GexfExtensionPropertySet> _extensionProperties;
 
         public GexfId Id { get; }
         public GexfId Source { get; }
@@ -28,6 +28,7 @@ namespace DotNet.Gexf
             Weight = 1.0f;
 
             _attrValues = new Lazy<GexfAttributeValueSet>(() => new GexfAttributeValueSet());
+            _extensionProperties = new Lazy<GexfExtensionPropertySet>(() => new GexfExtensionPropertySet());
         }
 
         public virtual XElement Render(GexfXml xml, GexfGraph graph)
@@ -51,7 +52,14 @@ namespace DotNet.Gexf
                     () => AttrValues.Render(xml))
             );
 
+            if (_extensionProperties.IsValueCreated)
+            {
+                _extensionProperties.Value.WriteTo(xml, element);
+            }
+
             return element;
         }
+
+        public GexfExtensionPropertySet ExtensionProperties => _extensionProperties.Value;
     }
 }

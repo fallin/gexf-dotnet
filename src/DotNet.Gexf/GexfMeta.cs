@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Xml.Linq;
 
 namespace DotNet.Gexf
@@ -23,7 +22,7 @@ namespace DotNet.Gexf
             LastModified = DateTimeOffset.Now;
         }
 
-        public XElement Render(GexfXml xml)
+        public XElement ToXml(GexfXml xml)
         {
             bool AnyMetadataSpecified() => Specified(LastModified)
                 || Specified(Creator)

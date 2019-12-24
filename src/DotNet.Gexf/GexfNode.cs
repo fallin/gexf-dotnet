@@ -6,9 +6,10 @@ using System.Xml.Linq;
 namespace DotNet.Gexf
 {
     [DebuggerDisplay("Id={Id}")]
-    public class GexfNode : IIdentifiable<GexfId>
+    public class GexfNode : IIdentifiable<GexfId>, IExtensionPropertyContainer
     {
         private readonly Lazy<GexfAttributeValueSet> _attrValues;
+        private readonly Lazy<GexfExtensionPropertySet> _extensionProperties;
 
         public GexfId Id { get; }
         public string Label { get; set; }
@@ -24,9 +25,10 @@ namespace DotNet.Gexf
             Label = label;
 
             _attrValues = new Lazy<GexfAttributeValueSet>(() => new GexfAttributeValueSet());
+            _extensionProperties = new Lazy<GexfExtensionPropertySet>(() => new GexfExtensionPropertySet());
         }
 
-        public virtual XElement Render(GexfXml xml, GexfGraph graph)
+        public virtual XElement ToXml(GexfXml xml, GexfGraph graph)
         {
             string RequiredLabel() => string.IsNullOrWhiteSpace(Label) ? $"{Id}" : Label;
 
@@ -42,7 +44,14 @@ namespace DotNet.Gexf
                     () => AttrValues.Render(xml))
             );
 
+            if (_extensionProperties.IsValueCreated)
+            {
+                _extensionProperties.Value.WriteTo(xml, element);
+            }
+
             return element;
         }
+
+        public GexfExtensionPropertySet ExtensionProperties => _extensionProperties.Value;
     }
 }

@@ -19,9 +19,9 @@ namespace DotNet.Gexf.Phylogeny
             Parents = new List<GexfId>();
         }
 
-        public override XElement Render(GexfXml xml, GexfGraph graph)
+        public override XElement ToXml(GexfXml xml, GexfGraph graph)
         {
-            var element = base.Render(xml, graph);
+            var element = base.ToXml(xml, graph);
 
             if (Parents.Any())
             {

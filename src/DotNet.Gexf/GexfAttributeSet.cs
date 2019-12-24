@@ -12,7 +12,7 @@ namespace DotNet.Gexf
             Class = @class;
         }
 
-        public XElement Render(GexfXml xml)
+        public XElement ToXml(GexfXml xml)
         {
             XElement element = null;
 
@@ -24,7 +24,7 @@ namespace DotNet.Gexf
 
                 foreach (GexfAttribute attribute in this)
                 {
-                    element.Add(attribute.Render(xml));
+                    element.Add(attribute.ToXml(xml));
                 }
             }
 
