@@ -1,18 +1,9 @@
-# gexf-dotnet
+<Query Kind="Program">
+  <Reference Relative="..\src\Gexf\bin\Debug\netstandard2.0\Gexf.dll">D:\Code\gexf-dotnet\src\Gexf\bin\Debug\netstandard2.0\Gexf.dll</Reference>
+  <Namespace>Gexf</Namespace>
+  <Namespace>System.Runtime.Serialization</Namespace>
+</Query>
 
-A .NET/C# library to generate [GEXF](https://gephi.org/gexf/format/) (Graph Exchange XML Format) files
-
-## Getting Started
-
-Install using the NuGet Package Manager
-
-```
-PM> Install-Package gexf-dotnet
-```
-
-### Example Usage
-
-```c#
 void Main()
 {
 	ObjectIDGenerator idGenerator = new ObjectIDGenerator();
@@ -93,5 +84,3 @@ class Location
 	public decimal Lon { get; }
 	public string Label { get; }
 }
-```
-
