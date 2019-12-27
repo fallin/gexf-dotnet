@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Brant Fallin</Authors>
+    <Authors>fallin</Authors>
     <Company />
     <Version>0.1.0</Version>
     <Copyright>Copyright © 2019, Brant Fallin</Copyright>
@@ -11,7 +11,12 @@
     <Description>A .NET/C# library to generate GEXF (Graph Exchange XML Format) files</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile></PackageLicenseFile>
-    <PackageLicenseExpression>https://licenses.nuget.org/MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageId>gexf-dotnet</PackageId>
+    <Product>gexf-dotnet</Product>
+    <PackageTags>gexf gephi</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/fallin/gexf-dotnet</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
