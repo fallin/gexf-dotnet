@@ -1,4 +1,4 @@
-﻿namespace DotNet.Gexf.Visualization
+﻿namespace Gexf.Visualization
 {
     public enum GexfEdgeShape
     {

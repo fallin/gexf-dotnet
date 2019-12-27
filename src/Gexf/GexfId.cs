@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     public abstract class GexfId : IEquatable<GexfId>
     {

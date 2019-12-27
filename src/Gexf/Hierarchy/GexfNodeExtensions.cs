@@ -1,4 +1,4 @@
-﻿namespace DotNet.Gexf.Hierarchy
+﻿namespace Gexf.Hierarchy
 {
     public static class GexfNodeExtensions
     {

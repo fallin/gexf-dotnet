@@ -1,4 +1,4 @@
-﻿namespace DotNet.Gexf
+﻿namespace Gexf
 {
     public enum GexfWeightType
     {

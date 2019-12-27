@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using System.Xml.Linq;
 
-namespace DotNet.Gexf.Visualization.ExtensionProperties
+namespace Gexf.Visualization.ExtensionProperties
 {
     public class VizPositionProperty : IGexfExtensionProperty
     {

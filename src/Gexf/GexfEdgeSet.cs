@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     public sealed class GexfEdgeSet : GexfHashSet<GexfEdge>
     {

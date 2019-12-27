@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     public sealed class IdentifiableEqualityComparer<TObject, TKey> : IEqualityComparer<TObject>
         where TObject : IIdentifiable<TKey> 

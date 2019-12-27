@@ -10,6 +10,8 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Description>A .NET/C# library to generate GEXF (Graph Exchange XML Format) files</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile></PackageLicenseFile>
+    <PackageLicenseExpression>https://licenses.nuget.org/MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

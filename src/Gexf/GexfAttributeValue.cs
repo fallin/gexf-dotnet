@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     public sealed class GexfAttributeValue : IIdentifiable<GexfId>
     {

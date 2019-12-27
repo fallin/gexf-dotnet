@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     public abstract class GexfHashSet<T> : HashSet<T> where T : IIdentifiable<GexfId> 
     {

@@ -4,7 +4,7 @@ using FluentAssertions.Execution;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace DotNet.Gexf.UnitTests
+namespace Gexf.UnitTests
 {
     [TestFixture]
     public class GexfIdTests

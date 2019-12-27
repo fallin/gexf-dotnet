@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     public sealed class GexfOptions : HashSet<string>
     {

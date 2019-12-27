@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Xml.Linq;
 
-namespace DotNet.Gexf.Visualization.ExtensionProperties
+namespace Gexf.Visualization.ExtensionProperties
 {
     public class VizColorProperty : IGexfExtensionProperty
     {

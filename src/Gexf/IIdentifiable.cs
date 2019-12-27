@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     /// <summary>
     /// A uniquely identifiable object (keyed object)

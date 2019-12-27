@@ -1,8 +1,7 @@
-﻿using System;
-using System.Drawing;
-using DotNet.Gexf.Visualization.ExtensionProperties;
+﻿using System.Drawing;
+using Gexf.Visualization.ExtensionProperties;
 
-namespace DotNet.Gexf.Visualization
+namespace Gexf.Visualization
 {
     public static class GexfEdgeExtensions
     {

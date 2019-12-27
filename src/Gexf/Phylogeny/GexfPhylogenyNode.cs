@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace DotNet.Gexf.Phylogeny
+namespace Gexf.Phylogeny
 {
     public class GexfPhylogenyNode : GexfNode
     {

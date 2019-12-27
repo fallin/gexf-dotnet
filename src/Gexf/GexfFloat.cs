@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     public struct GexfFloat : IEquatable<GexfFloat>
     {

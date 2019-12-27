@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     [DebuggerDisplay("Id={Id}")]
     public class GexfNode : IIdentifiable<GexfId>, IExtensionPropertyContainer

@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
-using DotNet.Gexf.Hierarchy;
-using DotNet.Gexf.Phylogeny;
+using Gexf.Hierarchy;
+using Gexf.Phylogeny;
 using NUnit.Framework;
 
-namespace DotNet.Gexf.UnitTests
+namespace Gexf.UnitTests
 {
     [Explicit("Examples create output files on Windows Desktop")]
     public class Examples

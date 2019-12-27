@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotNet.Gexf
+﻿namespace Gexf
 {
     public interface IExtensionPropertyContainer
     {

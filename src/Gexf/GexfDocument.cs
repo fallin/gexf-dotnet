@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace DotNet.Gexf
+namespace Gexf
 {
     /// <summary>
     /// https://gephi.org/gexf/1.2draft/gexf-12draft-primer.pdf

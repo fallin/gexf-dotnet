@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Numerics;
-using DotNet.Gexf.Visualization.ExtensionProperties;
+using Gexf.Visualization.ExtensionProperties;
 
-namespace DotNet.Gexf.Visualization
+namespace Gexf.Visualization
 {
     public static class GexfNodeExtensions
     {

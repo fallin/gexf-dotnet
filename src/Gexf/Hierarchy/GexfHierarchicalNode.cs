@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace DotNet.Gexf.Hierarchy
+namespace Gexf.Hierarchy
 {
     public class GexfHierarchicalNode : GexfNode
     {
