@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using Gexf.Hierarchy;
@@ -35,18 +34,12 @@ namespace Gexf.UnitTests
                 return (int) idGenerator.GetId(loc, out bool _);
             }
 
-            var dragon = new Location(40.589649m, -105.045624m, "Horse & Dragon Brewing Company, Craft Brewery");
+            var dragon = new Location(40.589649m, -105.045624m, "Horse & Dragon Brewing Company");
             var odell = new Location(40.589476m, -105.063186m, "Odell Brewing Company");
             var belgium = new Location(40.593238m, -105.068600m, "New Belgium Brewing Company");
             var equinox = new Location(40.586356m, -105.075812m, "Equinox Brewing");
 
-            var locations = new List<Location>()
-            {
-                dragon,
-                odell,
-                belgium,
-                equinox
-            };
+            var locations = new [] { dragon, odell, belgium, equinox };
 
             var gexf = new GexfDocument();
             gexf.Meta.LastModified = DateTimeOffset.Now;

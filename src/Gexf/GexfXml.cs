@@ -41,7 +41,12 @@ namespace Gexf
             return Attribute(name, value.ToString("yyyy-MM-dd"));
         }
 
-        public XAttribute Attribute<TEnum>(string name, TEnum @enum) where TEnum : Enum
+        public XAttribute Attribute(string name, DateTimeOffset? value)
+        {
+            return value.HasValue ? Attribute(name, value.Value) : null;
+        }
+
+        public XAttribute Attribute<T>(string name, T @enum) where T : struct, Enum
         {
             string value = @enum.ToString("g").ToLowerInvariant();
             return Attribute(name, value);
