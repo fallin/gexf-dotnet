@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Brant Fallin</Authors>
+    <Company />
+    <Version>0.1.0</Version>
+    <Copyright>Copyright © 2019, Brant Fallin</Copyright>
+    <RepositoryUrl>https://github.com/fallin/gexf-dotnet</RepositoryUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Description>A .NET/C# library to generate GEXF (Graph Exchange XML Format) files</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
