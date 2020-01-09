@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>fallin</Authors>
     <Company />
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Copyright>Copyright © 2019, Brant Fallin</Copyright>
     <RepositoryUrl>https://github.com/fallin/gexf-dotnet</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -17,6 +17,7 @@
     <PackageTags>gexf gephi</PackageTags>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/fallin/gexf-dotnet</PackageProjectUrl>
+    <PackageReleaseNotes />
   </PropertyGroup>
 
   <ItemGroup>

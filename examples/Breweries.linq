@@ -1,6 +1,7 @@
 <Query Kind="Program">
   <Reference Relative="..\src\Gexf\bin\Debug\netstandard2.0\Gexf.dll">D:\Code\gexf-dotnet\src\Gexf\bin\Debug\netstandard2.0\Gexf.dll</Reference>
   <Namespace>Gexf</Namespace>
+  <Namespace>Gexf.Visualization</Namespace>
   <Namespace>System.Runtime.Serialization</Namespace>
 </Query>
 
@@ -54,6 +55,7 @@ void Main()
 				new GexfAttributeValue(lon, location.Lon),
 			}
 		};
+		//node.Size(1.3);
 
 		gexf.Graph.Nodes.Add(node);
 	};
