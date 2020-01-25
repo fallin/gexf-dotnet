@@ -16,12 +16,12 @@ namespace Gexf
             Value = value;
         }
 
-        public XElement Render(GexfXml xml)
+        public XElement Render(GexfOutput output)
         {
             // ReSharper disable once StringLiteralTypo
-            var element = xml.Gexf.Element("attvalue",
-                xml.Attribute("for", For),
-                xml.Attribute("value", Value)
+            var element = output.Gexf.Element("attvalue",
+                output.Attribute("for", For),
+                output.Attribute("value", Value)
             );
 
             return element;

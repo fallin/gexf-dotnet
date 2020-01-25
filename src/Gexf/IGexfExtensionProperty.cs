@@ -4,6 +4,6 @@ namespace Gexf
 {
     public interface IGexfExtensionProperty : IIdentifiable<GexfId>
     {
-        void WriteTo(GexfXml xml, XElement element);
+        void WriteTo(GexfOutput output, XElement element);
     }
 }

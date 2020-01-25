@@ -13,10 +13,10 @@ namespace Gexf.Visualization.ExtensionProperties
             _shape = shape;
         }
 
-        public void WriteTo(GexfXml xml, XElement element)
+        public void WriteTo(GexfOutput output, XElement element)
         {
-            element.Add(xml.Viz.Element("shape",
-                xml.Attribute("value", _shape)
+            element.Add(output.Viz.Element("shape",
+                output.Attribute("value", _shape)
             ));
         }
     }

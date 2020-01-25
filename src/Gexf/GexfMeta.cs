@@ -22,37 +22,34 @@ namespace Gexf
             LastModified = DateTimeOffset.Now;
         }
 
-        public XElement ToXml(GexfXml xml)
+        public XElement ToXml(GexfOutput output)
         {
-            bool AnyMetadataSpecified() => Specified(LastModified)
-                || Specified(Creator)
-                || Specified(Description)
+            bool AnyMetadataSpecified() => LastModified.HasValue
+                || !string.IsNullOrEmpty(Creator)
+                || !string.IsNullOrEmpty(Description)
                 || Keywords.Any();
 
-            var element = xml.When(AnyMetadataSpecified,
+            var element = output.When(AnyMetadataSpecified,
                 () =>
-                    xml.Gexf.Element("meta",
+                    output.Gexf.Element("meta",
 
-                        xml.When(() => Specified(LastModified),
-                            () => xml.Attribute("lastmodifieddate", LastModified)),
+                        output.When(() => LastModified.HasValue,
+                            () => output.Attribute("lastmodifieddate", LastModified)),
 
-                        xml.When(() => Specified(Creator),
-                            () => xml.Gexf.Element("creator", Creator)
+                        output.When(() => !string.IsNullOrEmpty(Creator),
+                            () => output.Gexf.Element("creator", Creator)
                         ),
 
-                        xml.When(() => Specified(Description),
-                            () => xml.Gexf.Element("description", Description)
+                        output.When(() => !string.IsNullOrEmpty(Description),
+                            () => output.Gexf.Element("description", Description)
                         ),
 
-                        xml.When(() => Keywords.Any(),
-                            () => xml.Gexf.Element("keywords", string.Join(",", Keywords)
+                        output.When(() => Keywords.Any(),
+                            () => output.Gexf.Element("keywords", string.Join(",", Keywords)
                             )
                         )
                 ));
             return element;
         }
-
-        static bool Specified<T>(T? nullable) where T : struct => nullable.HasValue;
-        static bool Specified(string value) => !string.IsNullOrEmpty(value);
     }
 }

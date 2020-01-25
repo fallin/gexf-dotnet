@@ -13,15 +13,15 @@ namespace Gexf
         {
         }
 
-        public XElement ToXml(GexfXml xml, GexfGraph graph)
+        public XElement ToXml(GexfOutput output, GexfGraph graph)
         {
-            XElement nodes = xml.Gexf.Element("nodes",
-                xml.Attribute("count", this.Count)
+            XElement nodes = output.Gexf.Element("nodes",
+                output.Attribute("count", this.Count)
                 );
 
             foreach (GexfNode node in this)
             {
-                nodes.Add(node.ToXml(xml, graph));
+                nodes.Add(node.ToXml(output, graph));
             }
 
             return nodes;

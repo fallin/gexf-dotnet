@@ -17,7 +17,7 @@ namespace Gexf.UnitTests.Visualization.ExtensionProperties
         public string WriteToShouldWriteDoubleValue(double size)
         {
             var property = new VizSizeProperty(size);
-            var xml = new GexfXml();
+            var xml = new GexfOutput();
             var nodeElement = xml.Gexf.Element("node");
 
             property.WriteTo(xml, nodeElement);

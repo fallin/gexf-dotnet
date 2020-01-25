@@ -20,18 +20,18 @@ namespace Gexf.Hierarchy
             Edges = new GexfEdgeSet();
         }
 
-        public override XElement ToXml(GexfXml xml, GexfGraph graph)
+        public override XElement ToXml(GexfOutput output, GexfGraph graph)
         {
-            XElement element = base.ToXml(xml, graph);
+            XElement element = base.ToXml(output, graph);
 
             if (Nodes.Any())
             {
-                element.Add(Nodes.ToXml(xml, graph));
+                element.Add(Nodes.ToXml(output, graph));
             }
 
             if (Edges.Any())
             {
-                element.Add(Edges.ToXml(xml, graph));
+                element.Add(Edges.ToXml(output, graph));
             }
            
             return element;

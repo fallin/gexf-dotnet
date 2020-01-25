@@ -3,13 +3,19 @@ using System.Xml.Linq;
 
 namespace Gexf
 {
-    public class GexfXml
+    public class GexfOutput
     {
+        private readonly GexfOutputSettings _settings;
+
         public GexfElementFactory Gexf { get; }
         public GexfElementFactory Viz { get; }
 
-        public GexfXml()
+        public GexfOutput() : this(new GexfOutputSettings())
+        { }
+
+        public GexfOutput(GexfOutputSettings settings)
         {
+            _settings = settings;
             Gexf = new GexfElementFactory("http://www.gexf.net/1.2draft");
             Viz = new GexfElementFactory("http://www.gexf.net/1.2draft/viz");
         }
@@ -46,14 +52,30 @@ namespace Gexf
             return value.HasValue ? Attribute(name, value.Value) : null;
         }
 
-        public XAttribute Attribute<T>(string name, T @enum) where T : struct, Enum
+        public XAttribute DefaultedAttribute<T>(string name, T? value, T defaultValue) where T : struct, Enum
         {
-            string value = @enum.ToString("g").ToLowerInvariant();
-            return Attribute(name, value);
+            switch (_settings.DefaultValueHandling)
+            {
+                case GexfDefaultValueHandling.IncludeIfAssigned:
+                    return When(() => value.HasValue, () => Attribute(name, value));
+                case GexfDefaultValueHandling.Include:
+                    return Attribute(name, value ?? defaultValue);
+                case GexfDefaultValueHandling.Ignore:
+                    value = value ?? defaultValue;
+                    return When(() => !value.Equals(defaultValue), () => Attribute(name, value));
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(_settings.DefaultValueHandling),
+                        _settings.DefaultValueHandling, "Unsupported GEXF DefaultValueHandling value specified");
+            }
         }
 
         public XAttribute Attribute(string name, object value)
         {
+            if (value is Enum @enum)
+            {
+                value = @enum.ToString("g").ToLowerInvariant();
+            }
+
             return new XAttribute(name, value);
         }
 

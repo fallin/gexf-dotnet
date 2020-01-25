@@ -14,19 +14,19 @@ namespace Gexf
         {
         }
 
-        public XElement ToXml(GexfXml xml, GexfGraph graph)
+        public XElement ToXml(GexfOutput output, GexfGraph graph)
         {
             XElement edges = null;
 
             if (this.Any())
             {
-                edges = xml.Gexf.Element("edges",
-                    xml.Attribute("count", this.Count)
+                edges = output.Gexf.Element("edges",
+                    output.Attribute("count", this.Count)
                 );
 
                 foreach (GexfEdge edge in this)
                 {
-                    edges.Add(edge.Render(xml, graph));
+                    edges.Add(edge.Render(output, graph));
                 }
             }
 

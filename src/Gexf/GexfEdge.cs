@@ -31,30 +31,29 @@ namespace Gexf
             _extensionProperties = new Lazy<GexfExtensionPropertySet>(() => new GexfExtensionPropertySet());
         }
 
-        public virtual XElement Render(GexfXml xml, GexfGraph graph)
+        public virtual XElement Render(GexfOutput output, GexfGraph graph)
         {
-            var element = xml.Gexf.Element("edge",
-                xml.Attribute("id", Id),
-                xml.Attribute("source", Source),
-                xml.Attribute("target", Target),
+            var element = output.Gexf.Element("edge",
+                output.Attribute("id", Id),
+                output.Attribute("source", Source),
+                output.Attribute("target", Target),
 
                 // The label attribute is optional
-                xml.When(() => !string.IsNullOrEmpty(Label),
-                    () => xml.Attribute("label", Label)),
+                output.When(() => !string.IsNullOrEmpty(Label),
+                    () => output.Attribute("label", Label)),
                 
-                xml.When(() => !Weight.Equals(1.0f),
-                    () => xml.Attribute("weight", Weight)),
+                output.When(() => !Weight.Equals(1.0f),
+                    () => output.Attribute("weight", Weight)),
 
-                xml.When(() => Type.HasValue && Type != graph.DefaultEdgeType,
-                    () => xml.Attribute("type", Type)),
+                output.DefaultedAttribute("type", Type, graph.DefaultedEdgeType ?? GexfEdgeType.Undirected),
 
-                xml.When(() => _attrValues.IsValueCreated && AttrValues.Any(),
-                    () => AttrValues.Render(xml))
+                output.When(() => _attrValues.IsValueCreated && AttrValues.Any(),
+                    () => AttrValues.Render(output))
             );
 
             if (_extensionProperties.IsValueCreated)
             {
-                _extensionProperties.Value.WriteTo(xml, element);
+                _extensionProperties.Value.WriteTo(output, element);
             }
 
             return element;

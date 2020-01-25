@@ -16,22 +16,22 @@ namespace Gexf
             Id = id;
         }
 
-        public XElement ToXml(GexfXml xml)
+        public XElement ToXml(GexfOutput output)
         {
-            var element = xml.Gexf.Element("attribute",
-                xml.Attribute("id", Id),
-                xml.Attribute("title", Title),
-                xml.Attribute("type", Type)
+            var element = output.Gexf.Element("attribute",
+                output.Attribute("id", Id),
+                output.Attribute("title", Title),
+                output.Attribute("type", Type)
             );
 
             if (Default != null)
             {
-                element.Add(xml.Gexf.Element("default"), Default);
+                element.Add(output.Gexf.Element("default"), Default);
             }
 
             if (Options != null)
             {
-                element.Add(xml.Gexf.Element("options", Options));
+                element.Add(output.Gexf.Element("options", Options));
             }
 
             return element;

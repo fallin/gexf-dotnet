@@ -16,12 +16,12 @@ namespace Gexf.Visualization.ExtensionProperties
 
         public Uri ImageUrl { get; set; }
 
-        public void WriteTo(GexfXml xml, XElement element)
+        public void WriteTo(GexfOutput output, XElement element)
         {
-            element.Add(xml.Viz.Element("shape",
-                xml.Attribute("value", _shape),
-                xml.When(() => _shape == GexfNodeShape.Image,
-                    () => xml.Attribute("uri", ImageUrl))
+            element.Add(output.Viz.Element("shape",
+                output.Attribute("value", _shape),
+                output.When(() => _shape == GexfNodeShape.Image,
+                    () => output.Attribute("uri", ImageUrl))
             ));
         }
     }

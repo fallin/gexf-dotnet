@@ -4,11 +4,11 @@ namespace Gexf
 {
     public class GexfExtensionPropertySet : GexfHashSet<IGexfExtensionProperty>
     {
-        public void WriteTo(GexfXml xml, XElement element)
+        public void WriteTo(GexfOutput output, XElement element)
         {
             foreach (IGexfExtensionProperty property in this)
             {
-                property.WriteTo(xml, element);
+                property.WriteTo(output, element);
             }
         }
     }

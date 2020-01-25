@@ -13,10 +13,10 @@ namespace Gexf.Visualization.ExtensionProperties
             _thickness = thickness;
         }
 
-        public void WriteTo(GexfXml xml, XElement element)
+        public void WriteTo(GexfOutput output, XElement element)
         {
-            element.Add(xml.Viz.Element("thickness",
-                xml.Attribute("value", _thickness)
+            element.Add(output.Viz.Element("thickness",
+                output.Attribute("value", _thickness)
             ));
         }
     }

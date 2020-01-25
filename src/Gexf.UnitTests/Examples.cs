@@ -72,8 +72,8 @@ namespace Gexf.UnitTests
                     AttrValues =
                     {
                         new GexfAttributeValue(lat, location.Lat),
-                        new GexfAttributeValue(lon, location.Lon),
-                    }
+                        new GexfAttributeValue(lon, location.Lon)
+                    },
                 };
 
                 gexf.Graph.Nodes.Add(node);
@@ -96,7 +96,7 @@ namespace Gexf.UnitTests
         {
             var gexf = new GexfDocument();
 
-            gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
+            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Directed;
             gexf.Graph.Nodes.AddRange(
                 new GexfHierarchicalNode("a", "Kevin Bacon")
                 {
@@ -136,7 +136,7 @@ namespace Gexf.UnitTests
         {
             var gexf = new GexfDocument();
 
-            gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
+            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Directed;
             gexf.Graph.Nodes.AddRange(
                 new GexfHierarchicalNode("a", "Kevin Bacon")
                 {
@@ -177,7 +177,7 @@ namespace Gexf.UnitTests
         {
             var gexf = new GexfDocument();
 
-            gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
+            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Directed;
             gexf.Graph.Nodes.AddRange(
                 new GexfNode("a", "Kevin Bacon"),
                 new GexfNode("b", "God")

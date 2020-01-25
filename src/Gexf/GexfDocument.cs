@@ -16,28 +16,30 @@ namespace Gexf
             Graph = new GexfGraph();
         }
 
-        public XDocument ToXml()
+        public XDocument ToXml(GexfOutputSettings settings)
         {
-            GexfXml xml = new GexfXml();
+            GexfOutput output = new GexfOutput(settings);
 
-            XDocument doc = new XDocument(
+            XDocument document = new XDocument(
                 new XDeclaration("1.1", "utf-8", "yes"),
-                xml.Gexf.Element("gexf",
-                    new XAttribute("xmlns", xml.Gexf.Namespace),
-                    new XAttribute(XNamespace.Xmlns + "viz", xml.Viz.Namespace),
+                output.Gexf.Element("gexf",
+                    new XAttribute("xmlns", output.Gexf.Namespace),
+                    new XAttribute(XNamespace.Xmlns + "viz", output.Viz.Namespace),
                     new XAttribute("version", "1.2"),
-                    Meta.ToXml(xml),
-                    Graph.ToXml(xml)
+                    Meta.ToXml(output),
+                    Graph.ToXml(output)
                     )
             );
 
-            return doc;
+            return document;
         }
 
-        public void Save(string fileName)
+        public void Save(string fileName, GexfOutputSettings settings = null)
         {
-            var xdoc = ToXml();
-            xdoc.Save(fileName, SaveOptions.OmitDuplicateNamespaces);
+            settings = settings ?? new GexfOutputSettings();
+
+            var document = ToXml(settings);
+            document.Save(fileName, SaveOptions.OmitDuplicateNamespaces);
         }
     }
 }
