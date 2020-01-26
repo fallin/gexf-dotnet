@@ -5,18 +5,18 @@ namespace Gexf
 {
     public sealed class GexfAttributeValueSet : GexfHashSet<GexfAttributeValue>
     {
-        public XElement Render(GexfXml xml)
+        public XElement Render(GexfOutput output)
         {
             XElement element = null;
 
             if (this.Any())
             {
                 // ReSharper disable once StringLiteralTypo
-                element = xml.Gexf.Element("attvalues");
+                element = output.Gexf.Element("attvalues");
 
                 foreach (GexfAttributeValue attributeValue in this)
                 {
-                    element.Add(attributeValue.Render(xml));
+                    element.Add(attributeValue.Render(output));
                 }
             }
 

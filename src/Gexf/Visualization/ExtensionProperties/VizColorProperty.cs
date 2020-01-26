@@ -14,12 +14,12 @@ namespace Gexf.Visualization.ExtensionProperties
             _color = color;
         }
 
-        public void WriteTo(GexfXml xml, XElement element)
+        public void WriteTo(GexfOutput output, XElement element)
         {
-            element.Add(xml.Viz.Element("color",
-                xml.Attribute("r", _color.R),
-                xml.Attribute("g", _color.G),
-                xml.Attribute("b", _color.B)
+            element.Add(output.Viz.Element("color",
+                output.Attribute("r", _color.R),
+                output.Attribute("g", _color.G),
+                output.Attribute("b", _color.B)
             ));
         }
     }

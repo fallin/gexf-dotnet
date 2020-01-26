@@ -14,12 +14,12 @@ namespace Gexf.Visualization.ExtensionProperties
             _position = position;
         }
 
-        public void WriteTo(GexfXml xml, XElement element)
+        public void WriteTo(GexfOutput output, XElement element)
         {
-            element.Add(xml.Viz.Element("position",
-                xml.Attribute("x", _position.X),
-                xml.Attribute("y", _position.Y),
-                xml.Attribute("z", _position.Z)
+            element.Add(output.Viz.Element("position",
+                output.Attribute("x", _position.X),
+                output.Attribute("y", _position.Y),
+                output.Attribute("z", _position.Z)
             ));
         }
     }

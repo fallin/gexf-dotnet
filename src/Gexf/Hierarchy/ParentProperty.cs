@@ -13,11 +13,11 @@ namespace Gexf.Hierarchy
             _parent = parent;
         }
 
-        public void WriteTo(GexfXml xml, XElement element)
+        public void WriteTo(GexfOutput output, XElement element)
         {
             if (_parent != null)
             {
-                element.Add(xml.Attribute("pid", _parent));
+                element.Add(output.Attribute("pid", _parent));
             }
         }
     }

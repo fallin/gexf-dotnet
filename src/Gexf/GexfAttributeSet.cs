@@ -12,19 +12,19 @@ namespace Gexf
             Class = @class;
         }
 
-        public XElement ToXml(GexfXml xml)
+        public XElement ToXml(GexfOutput output)
         {
             XElement element = null;
 
             if (this.Any())
             {
-                element = xml.Gexf.Element("attributes",
-                    xml.Attribute("class", Class)
+                element = output.Gexf.Element("attributes",
+                    output.Attribute("class", Class)
                 );
 
                 foreach (GexfAttribute attribute in this)
                 {
-                    element.Add(attribute.ToXml(xml));
+                    element.Add(attribute.ToXml(output));
                 }
             }
 

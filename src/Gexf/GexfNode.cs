@@ -28,25 +28,25 @@ namespace Gexf
             _extensionProperties = new Lazy<GexfExtensionPropertySet>(() => new GexfExtensionPropertySet());
         }
 
-        public virtual XElement ToXml(GexfXml xml, GexfGraph graph)
+        public virtual XElement ToXml(GexfOutput output, GexfGraph graph)
         {
             string RequiredLabel() => string.IsNullOrWhiteSpace(Label) ? $"{Id}" : Label;
 
-            var element = xml.Gexf.Element("node",
-                xml.Attribute("id", Id),
+            var element = output.Gexf.Element("node",
+                output.Attribute("id", Id),
 
                 // The label attribute is required
-                xml.Attribute("label", RequiredLabel()),
+                output.Attribute("label", RequiredLabel()),
 
-                xml.When(() => Id.Type != graph.IdType,
-                    () => xml.Attribute("type", Id.Type)),
-                xml.When(() => _attrValues.IsValueCreated && AttrValues.Any(),
-                    () => AttrValues.Render(xml))
+                output.When(() => Id.Type != graph.IdType,
+                    () => output.Attribute("type", Id.Type)),
+                output.When(() => _attrValues.IsValueCreated && AttrValues.Any(),
+                    () => AttrValues.Render(output))
             );
 
             if (_extensionProperties.IsValueCreated)
             {
-                _extensionProperties.Value.WriteTo(xml, element);
+                _extensionProperties.Value.WriteTo(output, element);
             }
 
             return element;

@@ -46,6 +46,7 @@ namespace Gexf.UnitTests
             gexf.Meta.Creator = "NUnit";
 
             gexf.Graph.IdType = GexfIdType.Integer;
+            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Undirected;
 
             GexfId lat = "lat";
             GexfId lon = "lon";
@@ -72,8 +73,8 @@ namespace Gexf.UnitTests
                     AttrValues =
                     {
                         new GexfAttributeValue(lat, location.Lat),
-                        new GexfAttributeValue(lon, location.Lon),
-                    }
+                        new GexfAttributeValue(lon, location.Lon)
+                    },
                 };
 
                 gexf.Graph.Nodes.Add(node);
@@ -88,7 +89,12 @@ namespace Gexf.UnitTests
             string path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 "breweries.gexf");
+            
             gexf.Save(path);
+            // gexf.Save(path, new GexfOutputSettings
+            // {
+            //     DefaultValueHandling = GexfDefaultValueHandling.Include
+            // });
         }
 
         [Test]
@@ -96,7 +102,7 @@ namespace Gexf.UnitTests
         {
             var gexf = new GexfDocument();
 
-            gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
+            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Directed;
             gexf.Graph.Nodes.AddRange(
                 new GexfHierarchicalNode("a", "Kevin Bacon")
                 {
@@ -136,7 +142,7 @@ namespace Gexf.UnitTests
         {
             var gexf = new GexfDocument();
 
-            gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
+            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Directed;
             gexf.Graph.Nodes.AddRange(
                 new GexfHierarchicalNode("a", "Kevin Bacon")
                 {
@@ -177,7 +183,7 @@ namespace Gexf.UnitTests
         {
             var gexf = new GexfDocument();
 
-            gexf.Graph.DefaultEdgeType = GexfEdgeType.Directed;
+            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Directed;
             gexf.Graph.Nodes.AddRange(
                 new GexfNode("a", "Kevin Bacon"),
                 new GexfNode("b", "God")

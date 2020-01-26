@@ -19,18 +19,18 @@ namespace Gexf.Phylogeny
             Parents = new List<GexfId>();
         }
 
-        public override XElement ToXml(GexfXml xml, GexfGraph graph)
+        public override XElement ToXml(GexfOutput output, GexfGraph graph)
         {
-            var element = base.ToXml(xml, graph);
+            var element = base.ToXml(output, graph);
 
             if (Parents.Any())
             {
-                XElement parentsElement = xml.Gexf.Element("parents");
+                XElement parentsElement = output.Gexf.Element("parents");
 
                 foreach (GexfId parent in Parents)
                 {
-                    parentsElement.Add(xml.Gexf.Element("parent",
-                        xml.Attribute("for", parent)));
+                    parentsElement.Add(output.Gexf.Element("parent",
+                        output.Attribute("for", parent)));
                 }
 
                 element.Add(parentsElement);
