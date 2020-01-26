@@ -95,3 +95,6 @@ class Location
 }
 ```
 
+### Change Log
+
+The change log is available [here](https://github.com/fallin/gexf-dotnet/blob/master/ChangeLog.md).

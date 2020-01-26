@@ -46,6 +46,7 @@ namespace Gexf.UnitTests
             gexf.Meta.Creator = "NUnit";
 
             gexf.Graph.IdType = GexfIdType.Integer;
+            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Undirected;
 
             GexfId lat = "lat";
             GexfId lon = "lon";
@@ -88,7 +89,12 @@ namespace Gexf.UnitTests
             string path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 "breweries.gexf");
+            
             gexf.Save(path);
+            // gexf.Save(path, new GexfOutputSettings
+            // {
+            //     DefaultValueHandling = GexfDefaultValueHandling.Include
+            // });
         }
 
         [Test]
