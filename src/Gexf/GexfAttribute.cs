@@ -11,6 +11,12 @@ namespace Gexf
         public object Default { get; set; }
         public GexfOptions Options { get; set; }
 
+        public GexfAttribute(GexfId id, string title, GexfDataType type) : this(id)
+        {
+            Title = title;
+            Type = type;
+        }
+
         public GexfAttribute(GexfId id)
         {
             Id = id;

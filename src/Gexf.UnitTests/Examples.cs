@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using Gexf.Hierarchy;
 using Gexf.Phylogeny;
@@ -12,13 +13,15 @@ namespace Gexf.UnitTests
     {
         class Location
         {
-            public Location(decimal lat, decimal lon, string label)
+            public Location(int id, decimal lat, decimal lon, string label)
             {
+                Id = id;
                 Lat = lat;
                 Lon = lon;
                 Label = label;
             }
 
+            public int Id { get; }
             public decimal Lat { get; }
             public decimal Lon { get; }
             public string Label { get; }
@@ -27,63 +30,42 @@ namespace Gexf.UnitTests
         [Test]
         public void BreweriesTopology()
         {
-            ObjectIDGenerator idGenerator = new ObjectIDGenerator();
-
-            GexfId UniqueId(Location loc)
-            {
-                return (int) idGenerator.GetId(loc, out bool _);
-            }
-
-            var dragon = new Location(40.589649m, -105.045624m, "Horse & Dragon Brewing Company");
-            var odell = new Location(40.589476m, -105.063186m, "Odell Brewing Company");
-            var belgium = new Location(40.593238m, -105.068600m, "New Belgium Brewing Company");
-            var equinox = new Location(40.586356m, -105.075812m, "Equinox Brewing");
+            var dragon = new Location(1, 40.589649m, -105.045624m, "Horse & Dragon Brewing Company");
+            var odell = new Location(2, 40.589476m, -105.063186m, "Odell Brewing Company");
+            var belgium = new Location(3, 40.593238m, -105.068600m, "New Belgium Brewing Company");
+            var equinox = new Location(4, 40.586356m, -105.075812m, "Equinox Brewing");
 
             var locations = new [] { dragon, odell, belgium, equinox };
 
             var gexf = new GexfDocument();
             gexf.Meta.LastModified = DateTimeOffset.Now;
-            gexf.Meta.Creator = "NUnit";
+            gexf.Meta.Creator = Environment.UserName;
 
             gexf.Graph.IdType = GexfIdType.Integer;
-            gexf.Graph.DefaultedEdgeType = GexfEdgeType.Undirected;
 
             GexfId lat = "lat";
             GexfId lon = "lon";
 
-            gexf.Graph.NodeAttributes.AddRange(new[]
-            {
-                new GexfAttribute(lat)
-                {
-                    Title = "latitude",
-                    Type = GexfDataType.Double
-                },
-                new GexfAttribute(lon)
-                {
-                    Title = "longitude",
-                    Type = GexfDataType.Double
-                }
-            });
+            gexf.Graph.NodeAttributes.AddRange(
+                new GexfAttribute(lat, "latitude", GexfDataType.Double), 
+                new GexfAttribute(lon, "longitude", GexfDataType.Double)
+                );
 
-            foreach (var location in locations)
-            {
-                var node = new GexfNode(UniqueId(location))
+            gexf.Graph.Nodes.AddRange(locations.Select(location => 
+                new GexfNode(location.Id)
                 {
                     Label = location.Label,
                     AttrValues =
                     {
                         new GexfAttributeValue(lat, location.Lat),
                         new GexfAttributeValue(lon, location.Lon)
-                    },
-                };
-
-                gexf.Graph.Nodes.Add(node);
-            };
+                    }
+                }));
 
             gexf.Graph.Edges.AddRange(
-                new GexfEdge(1, UniqueId(dragon), UniqueId(odell)),
-                new GexfEdge(2, UniqueId(odell), UniqueId(belgium)),
-                new GexfEdge(3, UniqueId(belgium), UniqueId(equinox))
+                new GexfEdge(1, dragon.Id, odell.Id),
+                new GexfEdge(2, odell.Id, belgium.Id),
+                new GexfEdge(3, belgium.Id, equinox.Id)
                 );
 
             string path = Path.Combine(
@@ -91,10 +73,6 @@ namespace Gexf.UnitTests
                 "breweries.gexf");
             
             gexf.Save(path);
-            // gexf.Save(path, new GexfOutputSettings
-            // {
-            //     DefaultValueHandling = GexfDefaultValueHandling.Include
-            // });
         }
 
         [Test]
