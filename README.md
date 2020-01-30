@@ -77,6 +77,54 @@ class Location
 }
 ```
 
+This code generates the following GEXF file:
+
+```xml
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:viz="http://www.gexf.net/1.2draft/viz" version="1.2">
+  <meta lastmodifieddate="2020-01-29">
+    <creator>you</creator>
+  </meta>
+  <graph idtype="integer">
+    <attributes class="node">
+      <attribute id="lat" title="latitude" type="double" />
+      <attribute id="lon" title="longitude" type="double" />
+    </attributes>
+    <nodes count="4">
+      <node id="1" label="Horse &amp; Dragon Brewing Company">
+        <attvalues>
+          <attvalue for="lat" value="40.589649" />
+          <attvalue for="lon" value="-105.045624" />
+        </attvalues>
+      </node>
+      <node id="2" label="Odell Brewing Company">
+        <attvalues>
+          <attvalue for="lat" value="40.589476" />
+          <attvalue for="lon" value="-105.063186" />
+        </attvalues>
+      </node>
+      <node id="3" label="New Belgium Brewing Company">
+        <attvalues>
+          <attvalue for="lat" value="40.593238" />
+          <attvalue for="lon" value="-105.068600" />
+        </attvalues>
+      </node>
+      <node id="4" label="Equinox Brewing">
+        <attvalues>
+          <attvalue for="lat" value="40.586356" />
+          <attvalue for="lon" value="-105.075812" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges count="3">
+      <edge id="1" source="1" target="2" />
+      <edge id="2" source="2" target="3" />
+      <edge id="3" source="3" target="4" />
+    </edges>
+  </graph>
+</gexf>
+```
+
 ### Change Log
 
 The change log is available [here](https://github.com/fallin/gexf-dotnet/blob/master/ChangeLog.md).
