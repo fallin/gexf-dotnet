@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>fallin</Authors>
     <Company />
-    <Version>0.2.1</Version>
+    <Version>1.0.0-rc.1</Version>
     <Copyright>Copyright © 2019, Brant Fallin</Copyright>
     <RepositoryUrl>https://github.com/fallin/gexf-dotnet</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -18,11 +18,24 @@
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/fallin/gexf-dotnet</PackageProjectUrl>
     <PackageReleaseNotes />
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
   </ItemGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
 
 </Project>

@@ -1,5 +1,10 @@
 # gexf-dotnet change log
 
+1.0.0
+
+- Setup deterministic build and source linking
+- No new features or API changes since last release
+
 0.2.1
 
 - Writes viz:color alpha value for non-opaque colors
