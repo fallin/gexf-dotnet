@@ -2,6 +2,8 @@
 
 A .NET/C# library to generate [GEXF](https://gephi.org/gexf/format/) (Graph Exchange XML Format) files
 
+[![NuGet Badge](https://buildstats.info/nuget/gexf-dotnet)](https://www.nuget.org/packages/gexf-dotnet/)
+
 ## Getting Started
 
 Install using the NuGet Package Manager
