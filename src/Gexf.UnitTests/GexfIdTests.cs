@@ -1,8 +1,7 @@
 ﻿using System;
-using FluentAssertions;
-using FluentAssertions.Execution;
 using NSubstitute;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Gexf.UnitTests
 {
@@ -13,28 +12,28 @@ namespace Gexf.UnitTests
         public void ToStringShouldCorrectlyRepresentIntegerId()
         {
             GexfId id = new GexfId.Int(1);
-            id.ToString().Should().Be("1");
+            id.ToString().ShouldBe("1");
         }
 
         [Test]
         public void ToStringShouldCorrectlyRepresentStringId()
         {
             GexfId id = new GexfId.Str("A");
-            id.ToString().Should().Be("A");
+            id.ToString().ShouldBe("A");
         }
 
         [Test]
         public void ImplicitConversionOperatorShouldReturnIntIdWhenInteger()
         {
             GexfId id = 1;
-            id.Should().BeOfType<GexfId.Int>();
+            id.ShouldBeOfType<GexfId.Int>();
         }
 
         [Test]
         public void ImplicitConversionOperatorShouldReturnStrIdWhenString()
         {
             GexfId id = "A";
-            id.Should().BeOfType<GexfId.Str>();
+            id.ShouldBeOfType<GexfId.Str>();
         }
 
         [Test]
@@ -47,11 +46,8 @@ namespace Gexf.UnitTests
 
             id.Match(intFn, strFn);
 
-            using (new AssertionScope())
-            {
-                intFn.Received().Invoke(1);
-                strFn.DidNotReceiveWithAnyArgs();
-            }
+            intFn.Received().Invoke(1);
+            strFn.DidNotReceiveWithAnyArgs();
         }
 
         [Test]
@@ -64,11 +60,8 @@ namespace Gexf.UnitTests
 
             id.Match(intFn, strFn);
 
-            using (new AssertionScope())
-            {
-                intFn.DidNotReceiveWithAnyArgs();
-                strFn.Received().Invoke("A");
-            }
+            intFn.DidNotReceiveWithAnyArgs();
+            strFn.Received().Invoke("A");
         }
 
         [Test]
@@ -77,7 +70,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "23";
             GexfId id2 = "23";
 
-            id1.Equals(id2).Should().BeTrue();
+            id1.Equals(id2).ShouldBeTrue();
         }
 
         [Test]
@@ -86,7 +79,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "23";
             GexfId id2 = "32";
 
-            id1.Equals(id2).Should().BeFalse();
+            id1.Equals(id2).ShouldBeFalse();
         }
 
         [Test]
@@ -95,7 +88,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "A";
             GexfId id2 = "A";
 
-            id1.Equals(id2).Should().BeTrue();
+            id1.Equals(id2).ShouldBeTrue();
         }
 
         [Test]
@@ -104,7 +97,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "A";
             GexfId id2 = "B";
 
-            id1.Equals(id2).Should().BeFalse();
+            id1.Equals(id2).ShouldBeFalse();
         }
 
         [Test]
@@ -118,8 +111,8 @@ namespace Gexf.UnitTests
             GexfId id1 = 1;
             GexfId id2 = "1";
 
-            id1.Equals(id2).Should().BeTrue();
-            id2.Equals(id1).Should().BeTrue();
+            id1.Equals(id2).ShouldBeTrue();
+            id2.Equals(id1).ShouldBeTrue();
         }
         /// <summary>
         /// 
@@ -131,7 +124,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "23";
             GexfId id2 = "23";
 
-            id1.Equals((object)id2).Should().BeTrue();
+            id1.Equals((object)id2).ShouldBeTrue();
         }
 
         [Test]
@@ -140,7 +133,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "23";
             GexfId id2 = "32";
 
-            id1.Equals((object)id2).Should().BeFalse();
+            id1.Equals((object)id2).ShouldBeFalse();
         }
 
         [Test]
@@ -149,7 +142,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "A";
             GexfId id2 = "A";
 
-            id1.Equals((object)id2).Should().BeTrue();
+            id1.Equals((object)id2).ShouldBeTrue();
         }
 
         [Test]
@@ -158,7 +151,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "A";
             GexfId id2 = "B";
 
-            id1.Equals((object)id2).Should().BeFalse();
+            id1.Equals((object)id2).ShouldBeFalse();
         }
 
         [Test]
@@ -167,7 +160,7 @@ namespace Gexf.UnitTests
             GexfId id1 = 1;
             object id2 = 1;
 
-            id1.Equals(id2).Should().BeFalse();
+            id1.Equals(id2).ShouldBeFalse();
         }
 
         [Test]
@@ -176,7 +169,7 @@ namespace Gexf.UnitTests
             GexfId id1 = 1;
             object id2 = "1";
 
-            id1.Equals(id2).Should().BeFalse();
+            id1.Equals(id2).ShouldBeFalse();
         }
 
         [Test]
@@ -185,7 +178,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "1";
             object id2 = "1";
 
-            id1.Equals(id2).Should().BeFalse();
+            id1.Equals(id2).ShouldBeFalse();
         }
 
         [Test]
@@ -194,7 +187,7 @@ namespace Gexf.UnitTests
             GexfId id1 = "A";
             object id2 = "A";
 
-            id1.Equals(id2).Should().BeFalse();
+            id1.Equals(id2).ShouldBeFalse();
         }
     }
 }

@@ -37,7 +37,8 @@ namespace Gexf
 
             if (Options != null)
             {
-                element.Add(output.Gexf.Element("options", Options));
+                // GEXF v1.2draft uses pipe-delimited values, but v1.3 uses '[1,2]'
+                element.Add(output.Gexf.Element("options", Options.ToString()));
             }
 
             return element;

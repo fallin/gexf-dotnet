@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 using System.Xml.Linq;
-using FluentAssertions;
 using Gexf.Visualization.ExtensionProperties;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Gexf.UnitTests
 {
@@ -20,13 +20,13 @@ namespace Gexf.UnitTests
             property.WriteTo(output, element);
 
             var viz = output.Viz.Namespace;
-            element.Should()
-                .HaveElement(viz + "color").Which.Should()
-                .HaveAttribute("r", $"{expectedColor.R}").And
-                .HaveAttribute("g", $"{expectedColor.G}").And
-                .HaveAttribute("b", $"{expectedColor.B}");
 
-            element.Attribute("a").Should().BeNull("the alpha channel was not specified");
+            var colorElement = ShouldHaveElement(element, viz + "color");
+            ShouldHaveAttribute(colorElement, "r", $"{expectedColor.R}");
+            ShouldHaveAttribute(colorElement, "g", $"{expectedColor.G}");
+            ShouldHaveAttribute(colorElement, "b", $"{expectedColor.B}");
+            
+            colorElement.Attribute("a").ShouldBeNull("the alpha channel was not specified");
         }
 
         [Test]
@@ -40,12 +40,27 @@ namespace Gexf.UnitTests
             property.WriteTo(output, element);
 
             var viz = output.Viz.Namespace;
-            element.Should()
-                .HaveElement(viz + "color").Which.Should()
-                .HaveAttribute("r", $"{expectedColor.R}").And
-                .HaveAttribute("g", $"{expectedColor.G}").And
-                .HaveAttribute("b", $"{expectedColor.B}").And
-                .HaveAttribute("a", "20");
+            
+            var colorElement = ShouldHaveElement(element, viz + "color");
+            ShouldHaveAttribute(colorElement, "r", $"{expectedColor.R}");
+            ShouldHaveAttribute(colorElement, "g", $"{expectedColor.G}");
+            ShouldHaveAttribute(colorElement, "b", $"{expectedColor.B}");
+            ShouldHaveAttribute(colorElement, "a", "20");
+        }
+
+        static XElement ShouldHaveElement(XElement element, XName name)
+        {
+            var child = element.Element(name);
+            child.ShouldNotBeNull($"Expected element {element.Name} to contain child element {name}");
+            return child;
+        }
+
+        static void ShouldHaveAttribute(XElement element, XName name, string value)
+        {
+            element.Attribute(name).ShouldSatisfyAllConditions(
+                a => a.ShouldNotBeNull($"Expected element {element.Name} to contain attribute {name}"),
+                a => a.Value.ShouldBe(value)
+                );
         }
     }
 }
