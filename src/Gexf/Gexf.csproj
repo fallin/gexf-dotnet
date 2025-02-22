@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Authors>fallin</Authors>
     <Company />
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Copyright>Copyright © Brant Fallin 2019-2025.</Copyright>
     <RepositoryUrl>https://github.com/fallin/gexf-dotnet</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
