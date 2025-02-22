@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<attribute id="id" title="title" type="string" xmlns="http://www.gexf.net/1.2draft">
+  <options>value1|value2</options>
+</attribute>
