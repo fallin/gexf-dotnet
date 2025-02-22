@@ -1,5 +1,10 @@
 # gexf-dotnet change log
 
+1.0.1
+
+- Fix attribute options to use pipe delimiter (1.2draft)
+
+
 1.0.0
 
 - Setup deterministic build and source linking
